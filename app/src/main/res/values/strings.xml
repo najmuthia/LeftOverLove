@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">LeftOverLove</string>
+    <string name="title_activity_order_summary_screen">OrderSummaryScreen</string>
 </resources>
