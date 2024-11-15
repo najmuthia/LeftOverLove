@@ -47,7 +47,7 @@ fun IniRadit(name: String, modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun IniDayang2(name: String, modifier: Modifier = Modifier) {
+fun IniDayanggg(name: String, modifier: Modifier = Modifier) {
     Text(
         text = "Hello $name!",
         modifier = modifier
