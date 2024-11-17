@@ -12,70 +12,103 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.leftoverlove.ui.theme.Order.ui.theme.LeftOverLoveTheme
+//import com.example.leftoverlove.ui.theme.Order.ui.theme.LeftOverLoveTheme
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun OrderSummaryScreen() {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp)
-    ) {
-        // Top bar with title
-        Text(text = "Pesanan", style = MaterialTheme.typography.headlineSmall)
-
-        // Delivery and Pickup Buttons
-        Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
-            Button(onClick = { /* Pick up action */ }) {
-                Text("Pick up")
-            }
-            Button(
-                onClick = { /* Delivery action */ },
-                colors = ButtonDefaults.buttonColors(containerColor = Color.Gray)
+fun OrderSummaryScreen(onBackClick: () -> Unit = {}) {
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = { Text("Pesanan", style = MaterialTheme.typography.titleLarge) },
+                navigationIcon = {
+                    IconButton(onClick = onBackClick) {
+                        Icon(
+                            imageVector = Icons.Default.ArrowBack,
+                            contentDescription = "Back",
+                            tint = MaterialTheme.colorScheme.onSurface
+                        )
+                    }
+                }
+            )
+        }
+    ) { innerPadding ->
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(innerPadding)
+                .padding(16.dp)
+        ) {
+            // Delivery and Pickup Buttons
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                Text("Delivery")
+                Button(onClick = { /* Pick up action */ }) {
+                    Text("Pick up")
+                }
+                Button(
+                    onClick = { /* Delivery action */ },
+                    colors = ButtonDefaults.buttonColors(containerColor = Color.Gray)
+                ) {
+                    Text("Delivery")
+                }
             }
-        }
 
-        Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(16.dp))
 
-        // Address Section
-        Text("Alamat", style = MaterialTheme.typography.titleMedium)
-        Text("Rumah\nJl. Sumbersari Gg. 4 No. 225M, Kec. Lowokwaru, Kota Malang")
+            // Address Section
+            Text("Alamat", style = MaterialTheme.typography.titleMedium)
+            Text("Rumah\nJl. Sumbersari Gg. 4 No. 225M, Kec. Lowokwaru, Kota Malang")
 
-        Spacer(modifier = Modifier.height(8.dp))
+            Spacer(modifier = Modifier.height(8.dp))
 
-        // Order List
-        Text("Daftar Pesanan", style = MaterialTheme.typography.titleMedium)
-        OrderItem("Nasi Goreng Spesial", 10000)
-        OrderItem("Mie Goreng Spesial", 10000)
+            // Order List
+            Text("Daftar Pesanan", style = MaterialTheme.typography.titleMedium)
+            OrderItem("Nasi Goreng Spesial", 10000)
+            OrderItem("Mie Goreng Spesial", 10000)
 
-        // Promo Button
-        Button(onClick = { /* Promo action */ }, modifier = Modifier.fillMaxWidth()) {
-            Text("Pilih Promo")
-        }
+            Spacer(modifier = Modifier.height(8.dp))
 
-        Spacer(modifier = Modifier.height(8.dp))
+            // Promo Button
+            Button(
+                onClick = { /* Promo action */ },
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text("Pilih Promo")
+            }
 
-        // Payment Summary
-        Text("Ringkasan Pembayaran", style = MaterialTheme.typography.titleMedium)
-        PaymentSummary(subtotal = 20000, shippingFee = 10000, discount = 0, total = 30000)
+            Spacer(modifier = Modifier.height(8.dp))
 
-        Spacer(modifier = Modifier.height(16.dp))
+            // Payment Summary
+            Text("Ringkasan Pembayaran", style = MaterialTheme.typography.titleMedium)
+            PaymentSummary(subtotal = 20000, shippingFee = 10000, discount = 0, total = 30000)
 
-        // Order Button
-        Button(onClick = { /* Order Now action */ }, modifier = Modifier.fillMaxWidth()) {
-            Text("Pesan Sekarang")
+            Spacer(modifier = Modifier.height(16.dp))
+
+            // Order Button
+            Button(
+                onClick = { /* Order Now action */ },
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text("Pesan Sekarang")
+            }
         }
     }
 }
@@ -106,5 +139,8 @@ fun PaymentSummary(subtotal: Int, shippingFee: Int, discount: Int, total: Int) {
 @Preview(showBackground = true)
 @Composable
 fun PreviewOrderSummaryScreen() {
-    OrderSummaryScreen()
+    // Wrap the preview in your app theme for proper styling
+    MaterialTheme {
+        OrderSummaryScreen()
+    }
 }
