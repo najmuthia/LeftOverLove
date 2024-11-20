@@ -2,6 +2,7 @@ package com.example.papbroom
 
 
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
@@ -10,6 +11,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
@@ -50,17 +52,19 @@ fun DonasiScreen(onPaymentOptionClick: () -> Unit) {
             Spacer(modifier = Modifier.height(10.dp)) // Tambahkan jarak antar item
         }
 
+        Spacer(modifier = Modifier.height(30.dp))
+
         // Custom donation amount
         var customAmount by remember { mutableStateOf("") }
         OutlinedTextField(
             value = customAmount,
             onValueChange = { customAmount = it },
-            label = { Text("Jumlah Lain") },
+            label = { Text("Rp") },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
             modifier = Modifier.fillMaxWidth()
         )
 
-        Spacer(modifier = Modifier.height(30.dp))
+        Spacer(modifier = Modifier.height(70.dp))
 
         // Button to go to payment options
         Button(
@@ -89,11 +93,23 @@ fun PaymentMethodScreen(onProceedClick: () -> Unit) {
             modifier = Modifier.padding(bottom = 16.dp)
         )
 
-        // Payment methods categories
+        // Payment methods categories with associated images
         val paymentMethods = mapOf(
-            "E-Wallet" to listOf("Gopay", "Shopeepay", "OVO"),
-            "Bank Transfer" to listOf("Mandiri", "BSI", "BRI"),
-            "Gerai Offline" to listOf("Indomaret", "Alfamart", "Alfamidi")
+            "E-Wallet" to listOf(
+                Pair("Gopay", R.drawable.gopay_logo),
+                Pair("Shopeepay", R.drawable.spay_logo),
+                Pair("OVO", R.drawable.ovo_logo)
+            ),
+            "Bank Transfer" to listOf(
+                Pair("Mandiri", R.drawable.mandiri_logo),
+                Pair("BSI", R.drawable.bsi_logo),
+                Pair("BRI", R.drawable.bri_logo)
+            ),
+            "Gerai Offline" to listOf(
+                Pair("Indomaret", R.drawable.indomaret_logo),
+                Pair("Alfamart", R.drawable.alfamart_logo),
+                Pair("Alfamidi", R.drawable.alfamidi_logo)
+            )
         )
         var selectedMethod by remember { mutableStateOf<Pair<String, String>?>(null) }
 
@@ -104,7 +120,7 @@ fun PaymentMethodScreen(onProceedClick: () -> Unit) {
                 modifier = Modifier.padding(vertical = 8.dp)
             )
 
-            methods.forEach { method ->
+            methods.forEach { (method, imageRes) ->
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -119,6 +135,12 @@ fun PaymentMethodScreen(onProceedClick: () -> Unit) {
                             selectedColor = Color(0xFF92C947),
                             unselectedColor = Color.Gray
                         )
+                    )
+                    Spacer(modifier = Modifier.width(8.dp))
+                    Image(
+                        painter = painterResource(id = imageRes),
+                        contentDescription = "$method logo",
+                        modifier = Modifier.size(40.dp) // Adjust the size as needed
                     )
                     Spacer(modifier = Modifier.width(8.dp))
                     Text(text = method)
@@ -140,6 +162,7 @@ fun PaymentMethodScreen(onProceedClick: () -> Unit) {
         }
     }
 }
+
 
 @Preview(showBackground = true)
 @Composable
