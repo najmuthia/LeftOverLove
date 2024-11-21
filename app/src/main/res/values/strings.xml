@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">LeftOverLove</string>
     <string name="title_activity_order_summary_screen">OrderSummaryScreen</string>
+    <string name="title_activity_home_screen">HomeScreen</string>
+    <string name="title_activity_detail_makanan">DetailMakanan</string>
+    <string name="title_activity_app_navigation">AppNavigation</string>
+    <string name="title_activity_navigation_route">NavigationRoute</string>
+    <string name="title_activity_profile_screen">ProfileScreen</string>
+    <string name="title_activity_screen">ActivityScreen</string>
 </resources>

@@ -13,6 +13,36 @@
         android:theme="@style/Theme.LeftOverLove"
         tools:targetApi="31">
         <activity
+            android:name=".ui.theme.Activity.ActivityScreen"
+            android:exported="false"
+            android:label="@string/title_activity_screen"
+            android:theme="@style/Theme.LeftOverLove" />
+        <activity
+            android:name=".ui.theme.Profile.ProfileScreen"
+            android:exported="false"
+            android:label="@string/title_activity_profile_screen"
+            android:theme="@style/Theme.LeftOverLove" />
+        <activity
+            android:name=".Navigations.NavigationRoute"
+            android:exported="false"
+            android:label="@string/title_activity_navigation_route"
+            android:theme="@style/Theme.LeftOverLove" />
+        <activity
+            android:name=".Navigations.AppNavigation"
+            android:exported="false"
+            android:label="@string/title_activity_app_navigation"
+            android:theme="@style/Theme.LeftOverLove" />
+        <activity
+            android:name=".ui.theme.DetailMakanan.DetailMakanan"
+            android:exported="false"
+            android:label="@string/title_activity_detail_makanan"
+            android:theme="@style/Theme.LeftOverLove" />
+        <activity
+            android:name=".ui.theme.Home.HomeScreen"
+            android:exported="false"
+            android:label="@string/title_activity_home_screen"
+            android:theme="@style/Theme.LeftOverLove" />
+        <activity
             android:name=".ui.theme.Order.OrderSummaryScreen"
             android:exported="false"
             android:label="@string/title_activity_order_summary_screen"
