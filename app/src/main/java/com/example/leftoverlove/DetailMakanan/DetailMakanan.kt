@@ -1,4 +1,4 @@
-package com.example.leftoverlove.ui.theme.DetailMakanan
+package com.example.leftoverlove.DetailMakanan
 
 
 import android.os.Bundle

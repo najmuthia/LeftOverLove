@@ -1,4 +1,4 @@
-package com.example.leftoverlove.ui.theme.Home.ui.theme
+package com.example.leftoverlove.Profile.ui.theme
 
 import android.app.Activity
 import android.os.Build

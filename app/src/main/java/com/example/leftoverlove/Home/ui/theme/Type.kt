@@ -1,4 +1,4 @@
-package com.example.leftoverlove.ui.theme.DetailMakanan.ui.theme
+package com.example.leftoverlove.Home.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

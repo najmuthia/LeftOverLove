@@ -1,4 +1,4 @@
-package com.example.leftoverlove.ui.theme.Order
+package com.example.leftoverlove.Order
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity

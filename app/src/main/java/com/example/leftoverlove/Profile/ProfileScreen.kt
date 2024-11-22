@@ -1,4 +1,4 @@
-package com.example.leftoverlove.ui.theme.Activity
+package com.example.leftoverlove.Profile
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -11,16 +11,16 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.leftoverlove.ui.theme.Activity.ui.theme.LeftOverLoveTheme
+import com.example.leftoverlove.Profile.ui.theme.LeftOverLoveTheme
 
-class ActivityScreen : ComponentActivity() {
+class ProfileScreen : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
             LeftOverLoveTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting3(
+                    Greeting2(
                         name = "Android",
                         modifier = Modifier.padding(innerPadding)
                     )
@@ -31,7 +31,7 @@ class ActivityScreen : ComponentActivity() {
 }
 
 @Composable
-fun Greeting3(name: String, modifier: Modifier = Modifier) {
+fun Greeting2(name: String, modifier: Modifier = Modifier) {
     Text(
         text = "Hello $name!",
         modifier = modifier
@@ -40,8 +40,8 @@ fun Greeting3(name: String, modifier: Modifier = Modifier) {
 
 @Preview(showBackground = true)
 @Composable
-fun GreetingPreview5() {
+fun GreetingPreview4() {
     LeftOverLoveTheme {
-        Greeting3("Android")
+        Greeting2("Android")
     }
 }

@@ -1,4 +1,4 @@
-package com.example.leftoverlove.ui.theme.Activity.ui.theme
+package com.example.leftoverlove.Activity.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

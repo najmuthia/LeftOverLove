@@ -13,12 +13,12 @@
         android:theme="@style/Theme.LeftOverLove"
         tools:targetApi="31">
         <activity
-            android:name=".ui.theme.Activity.ActivityScreen"
+            android:name=".Activity.ActivityScreen"
             android:exported="false"
             android:label="@string/title_activity_screen"
             android:theme="@style/Theme.LeftOverLove" />
         <activity
-            android:name=".ui.theme.Profile.ProfileScreen"
+            android:name=".Profile.ProfileScreen"
             android:exported="false"
             android:label="@string/title_activity_profile_screen"
             android:theme="@style/Theme.LeftOverLove" />

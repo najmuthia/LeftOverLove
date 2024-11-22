@@ -1,4 +1,4 @@
-package com.example.leftoverlove.ui.theme.Profile.ui.theme
+package com.example.leftoverlove.DetailMakanan.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

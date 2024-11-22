@@ -1,4 +1,4 @@
-package com.example.leftoverlove.ui.theme.Home
+package com.example.leftoverlove.Home
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -11,7 +11,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.leftoverlove.ui.theme.Home.ui.theme.LeftOverLoveTheme
+import com.example.leftoverlove.Home.ui.theme.LeftOverLoveTheme
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
