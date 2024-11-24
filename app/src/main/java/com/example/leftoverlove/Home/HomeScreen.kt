@@ -1,9 +1,6 @@
 package com.example.leftoverlove.Home
 
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
@@ -12,33 +9,25 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.leftoverlove.Home.ui.theme.LeftOverLoveTheme
-import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.FavoriteBorder
-import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.List
-import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.*
-
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.input.TextFieldValue
-
-import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.TextUnit
-import androidx.compose.ui.text.font.FontWeight
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
+import com.example.leftoverlove.BottomNavBar
 import com.example.leftoverlove.R
 
 
@@ -69,7 +58,9 @@ fun HomeScreen(navController: NavHostController) {
             )
         },
         bottomBar = {
-            BottomNavigationBar()
+            // val navController = rememberNavController()
+
+            BottomNavBar(navController = navController)
         }
     ) { paddingValues ->
         Column(
@@ -82,7 +73,9 @@ fun HomeScreen(navController: NavHostController) {
             SearchBar()
 
             // Banner
-            //   Banner()
+            Banner(
+                onClick = { /* Navigasikan ke halaman Donasi */ }
+            )
 
             // Rekomendasi Makanan
             SectionTitle(title = "Rekomendasi Makanan")
@@ -118,7 +111,27 @@ fun SearchBar() {
         )
     )
 }
-
+//Banner
+@Composable
+fun Banner(onClick: () -> Unit) {
+    Box(
+        modifier = Modifier
+            .fillMaxWidth() // Memastikan gambar selebar layar
+            .height(200.dp) // Atur tinggi gambar sesuai kebutuhan
+            .padding(horizontal = 16.dp) // Tambahkan padding luar (opsional)
+            .clip(RoundedCornerShape(12.dp)) // Membuat sudut membulat
+            .background(MaterialTheme.colorScheme.surface) // Warna latar belakang (opsional)
+//            .clickable {
+//                navController.navigate("donationPage") // Aksi ketika gambar diklik
+//            }
+    ) {
+        Image(
+            painter = painterResource(id = R.drawable.bannerdonation), // Ganti dengan gambar yang kamu inginkan
+            contentDescription = "Gambar Banner",
+            modifier = Modifier.fillMaxSize()
+        )
+    }
+}
 // Section Title
 @Composable
 fun SectionTitle(title: String) {
@@ -213,36 +226,40 @@ fun RestaurantCard() {
     }
 }
 
-// Bottom Navigation Bar
-@Composable
-fun BottomNavigationBar() {
-    NavigationBar {
-        NavigationBarItem(
-            selected = false,
-            onClick = { /* TODO: Tambahkan aksi */ },
-            icon = {
-                Icon(Icons.Default.List, contentDescription = "Aktivitas")
-            },
-            label = { Text("Aktivitas") }
-        )
-        NavigationBarItem(
-            selected = true,
-            onClick = { /* TODO: Tambahkan aksi */ },
-            icon = {
-                Icon(Icons.Default.Home, contentDescription = "Beranda")
-            },
-            label = { Text("Beranda") }
-        )
-        NavigationBarItem(
-            selected = false,
-            onClick = { /* TODO: Tambahkan aksi */ },
-            icon = {
-                Icon(Icons.Default.Person, contentDescription = "Profil")
-            },
-            label = { Text("Profil") }
-        )
-    }
-}
+//// Bottom Navigation Bar
+//@Composable
+//fun BottomNavigationBar(navController: NavController) {
+//    NavigationBar {
+//        NavigationBarItem(
+//            selected = false,
+//            onClick = { navController.navigate("activity") },
+//            icon = {
+//                Icon(
+//                    painter = painterResource(id = R.drawable.aktivitas), // Ikon custom
+//                    contentDescription = "Aktivitas",
+//                    tint = Color(0xFF7B886F)
+//                )
+//            },
+//            label = { Text("Aktivitas") }
+//        )
+//        NavigationBarItem(
+//            selected = true,
+//            onClick = { /* TODO: Tambahkan aksi */ },
+//            icon = {
+//                Icon(Icons.Default.Home, contentDescription = "Beranda")
+//            },
+//            label = { Text("Beranda") }
+//        )
+//        NavigationBarItem(
+//            selected = false,
+//            onClick = { /* TODO: Tambahkan aksi */ },
+//            icon = {
+//                Icon(Icons.Default.Person, contentDescription = "Profil")
+//            },
+//            label = { Text("Profil") }
+//        )
+//    }
+
 
 
 
@@ -250,7 +267,10 @@ fun BottomNavigationBar() {
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview3() {
-    LeftOverLoveTheme{
-        HomeScreen()
+    LeftOverLoveTheme {
+        val navController = rememberNavController()
+
+        // Panggil HomeScreen dengan navController
+        HomeScreen(navController = navController)
     }
 }
