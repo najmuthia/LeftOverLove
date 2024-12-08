@@ -43,7 +43,7 @@ val Typography = Typography(
 
     // Title: Digunakan untuk subjudul atau judul bagian
     titleLarge = TextStyle(
-        fontWeight = FontWeight.SemiBold,
+        fontWeight = FontWeight.Bold,
         fontSize = 22.sp,
         lineHeight = 28.sp,
     ),

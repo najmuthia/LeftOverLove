@@ -5,7 +5,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.leftoverlove.Activity.ActivityScreen
-import com.example.leftoverlove.Home.HomeScreen
+import com.example.leftoverlove.Home.ui.HomeScreen
 import com.example.leftoverlove.Profile.ProfileScreen
 
 
@@ -29,5 +29,6 @@ fun AppNavigation(navController: NavHostController) {
         composable(NavigationRoute.Profile.route) {
             ProfileScreen(navController)
         }
+
     }
 }

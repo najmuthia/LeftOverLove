@@ -1,6 +1,8 @@
 package com.example.leftoverlove.DetailMakanan
 
 
+//import com.example.leftoverlove.foodDetail.ui.theme.LoLdygTheme
+
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -12,7 +14,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-//import com.example.leftoverlove.foodDetail.ui.theme.LoLdygTheme
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -29,56 +30,76 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.FavoriteBorder
+import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-
+import androidx.compose.material3.TopAppBar
 import androidx.compose.ui.Alignment
-
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.leftoverlove.R
 import com.example.leftoverlove.ui.theme.LeftOverLoveTheme
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 
-
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DetailMakanan(onBackClick: () -> Unit = {}) {
+fun DetailMakanan(navController: NavController) {
     Scaffold(
         topBar = {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(16.dp),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                IconButton(onClick = onBackClick) {
-                    Icon(
-                        imageVector = Icons.Default.ArrowBack,
-                        contentDescription = "Back"
-                    )
+            TopAppBar(
+                title = {
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.Center,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        IconButton(onClick = { navController.popBackStack() }) {
+                            Icon(
+                                imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                                contentDescription = "Back",
+                                tint = Color.Black
+                            )
+                        }
+                        Spacer(modifier = Modifier.weight(1f)) // Ruang fleksibel di kiri
+                        Text(
+                            text = "Detail Makanan",
+                            style = MaterialTheme.typography.titleLarge.copy(
+                                fontWeight = FontWeight.Bold,
+                                fontSize = 25.sp // Menambahkan ukuran font yang lebih besar
+                            ),
+                            modifier = Modifier.weight(5f), // Pastikan teks rata tengah
+                            textAlign = TextAlign.Center
+                        )
+                        Spacer(modifier = Modifier.weight(2f)) // Ruang fleksibel di kanan
+                    }
                 }
-                Text(
-                    text = "Detail Makanan",
-                    style = MaterialTheme.typography.headlineSmall,
-                    modifier = Modifier.weight(1f),
-                    fontWeight = FontWeight.Bold
-                )
-            }
+            )
         },
-        content = { padding ->
+    content = { padding ->
             Column(
                 modifier = Modifier
                     .padding(padding)
-                    .padding(16.dp)
+                    .padding(top = 5.dp, start = 16.dp, end = 16.dp)
+                    .verticalScroll(rememberScrollState()) // Tambahkan ini
             ) {
                 // Gambar Makanan
                 Image(
@@ -87,22 +108,46 @@ fun DetailMakanan(onBackClick: () -> Unit = {}) {
                     contentScale = ContentScale.Crop,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(200.dp)
+                        .height(220.dp)
+                        .width(350.dp)
+                        .clip(RoundedCornerShape(12.dp))
                 )
 
                 Spacer(modifier = Modifier.height(16.dp))
 
                 // Judul Makanan
-                Text(
-                    text = "Nasi Goreng Spesial",
-                    style = MaterialTheme.typography.titleLarge,
-                    fontWeight = FontWeight.Bold
-                )
-                Text(
-                    text = "Ditambahkan 50 menit yang lalu",
-                    style = MaterialTheme.typography.bodySmall,
-                    color = Color.Gray
-                )
+                Row(
+                    verticalAlignment = Alignment.CenterVertically // Menyelaraskan elemen secara vertikal
+                ) {
+                    Column(
+                        modifier = Modifier.weight(1f) // Kolom akan mengambil ruang yang cukup di baris
+                    ) {
+                        Text(
+                            text = "Nasi Goreng Spesial",
+                            style = MaterialTheme.typography.titleLarge.copy(
+                                fontWeight = FontWeight.Bold
+                            )
+                        )
+                        Text(
+                            text = "Ditambahkan 50 menit yang lalu",
+                            style = MaterialTheme.typography.bodySmall,
+                            color = Color.Gray
+                        )
+                    }
+
+                    // Menambahkan ikon di sebelah kanan
+                    IconButton(
+                        onClick = { /* Favorite Action */ },
+                        modifier = Modifier.size(40.dp)
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.FavoriteBorder,
+                            contentDescription = "Favorite",
+                            modifier = Modifier.align(Alignment.CenterVertically) // Menyelaraskan ikon secara vertikal
+                        )
+                    }
+                }
+
                 Spacer(modifier = Modifier.height(8.dp))
 
                 Row(
@@ -112,30 +157,30 @@ fun DetailMakanan(onBackClick: () -> Unit = {}) {
                 ) {
                     Text(
                         text = "Rp 10.000",
-                        style = MaterialTheme.typography.titleLarge,
+                        style = MaterialTheme.typography.bodyLarge,
                         fontWeight = FontWeight.Bold
                     )
+                    Spacer(modifier = Modifier.weight(1f))
                     Text(
                         text = "Tersisa 5 stok",
                         style = MaterialTheme.typography.bodySmall,
-                        color = Color.Red
-                    )
-                    IconButton(onClick = { /* Favorite Action */ }) {
-                        Icon(
-                            imageVector = Icons.Default.FavoriteBorder,
-                            contentDescription = "Favorite"
-                        )
-                    }
-                }
+                        color = Color.Red,
 
-                Spacer(modifier = Modifier.height(16.dp))
+
+                    )
+
+
+                }
+                HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
+                Spacer(modifier = Modifier.height(5.dp))
 
                 // Informasi Restoran
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Icon(
-                        painter = painterResource(id = R.drawable.nasi_goreng_88), // Ikon restoran
+                        painter = painterResource(id = R.drawable.iconwarung), // Ikon restoran
                         contentDescription = "Restoran",
-                        modifier = Modifier.size(32.dp)
+                        modifier = Modifier.size(32.dp),
+                        tint = Color.Unspecified
                     )
                     Spacer(modifier = Modifier.width(8.dp))
                     Column {
@@ -144,17 +189,48 @@ fun DetailMakanan(onBackClick: () -> Unit = {}) {
                             style = MaterialTheme.typography.bodyLarge,
                             fontWeight = FontWeight.Bold
                         )
-                        Text(
-                            text = "Alamat Lokasi\nJalan Soekarno Hatta Nomor 97",
-                            style = MaterialTheme.typography.bodySmall,
-                            color = Color.Gray
-                        )
+                       
+                       
+                       
+                       
+                       
                     }
                 }
 
                 Spacer(modifier = Modifier.height(16.dp))
 
+                Column {
+                    Text(
+                        text = "Waktu Pengambilan",
+                        style = MaterialTheme.typography.bodyLarge,
+                        fontWeight = FontWeight.Bold
+                    )
+                    Text(
+                        text = "19.00 - 20.00",
+                        style = MaterialTheme.typography.bodyLarge
+
+                    )
+                    Spacer(modifier = Modifier.height(13.dp))
+                    Text(
+                        text = "Alamat Pengambilan",
+                        style = MaterialTheme.typography.bodyLarge,
+                        fontWeight = FontWeight.Bold
+                    )
+                    Text(
+                        text = "Jalan Soekarno Hatta Nomor 97 ",
+                        style = MaterialTheme.typography.bodyLarge
+
+                    )
+                }
+                Spacer(modifier = Modifier.height(13.dp))
                 // Informasi Makanan
+                   Column{
+                          Text(                                             
+                              text = "Informasi Makanan",                   
+                              style = MaterialTheme.typography.bodyLarge,   
+                              fontWeight = FontWeight.Bold                  
+                          )      
+                   }
                 Card(
                     modifier = Modifier.fillMaxWidth(),
                     shape = RoundedCornerShape(8.dp),
@@ -163,11 +239,11 @@ fun DetailMakanan(onBackClick: () -> Unit = {}) {
                     Column(
                         modifier = Modifier.padding(16.dp)
                     ) {
-                        Text(
-                            text = "Informasi Makanan",
-                            style = MaterialTheme.typography.bodyLarge,
-                            fontWeight = FontWeight.Bold
-                        )
+          
+          
+          
+          
+          
                         Text(
                             text = """
                                 - Waktu Masak: 13:00 WIB
@@ -177,7 +253,7 @@ fun DetailMakanan(onBackClick: () -> Unit = {}) {
                                 - Kualitas makanan sepenuhnya tanggung jawab penjual
                             """.trimIndent(),
                             style = MaterialTheme.typography.bodySmall,
-                            color = Color.Gray
+                            color = Color(0xFFED9200)
                         )
                     }
                 }
@@ -192,46 +268,59 @@ fun DetailMakanan(onBackClick: () -> Unit = {}) {
                 )
                 Text(
                     text = "Nasi goreng dengan sayur dan telur mata sapi",
-                    style = MaterialTheme.typography.bodySmall,
-                    color = Color.Gray
+                    style = MaterialTheme.typography.bodyLarge,
+                    color = Color.Black
                 )
 
                 Spacer(modifier = Modifier.height(16.dp))
 
                 // Rating
-                Row(
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
+                Column{
                     Text(
                         text = "Rating Restoran",
                         style = MaterialTheme.typography.bodyLarge,
                         fontWeight = FontWeight.Bold
                     )
                     Spacer(modifier = Modifier.width(8.dp))
-                    Text(
-                        text = "4.8",
-                        style = MaterialTheme.typography.bodyLarge
-                    )
-                    Spacer(modifier = Modifier.width(4.dp))
-                    repeat(5) { index ->
-                        Icon(
-                            painter = painterResource(id = R.drawable.nasi_goreng_88), // Ikon bintang
-                            contentDescription = "Star",
-                            tint = if (index < 4) Color.Yellow else Color.Gray,
-                            modifier = Modifier.size(16.dp)
-                        )
-                    }
+                     Row {
+                         Text(
+                             text = "4.8",
+                             style = MaterialTheme.typography.bodyLarge
+                         )
+                         Spacer(modifier = Modifier.width(4.dp))
+
+                         Icon(
+                             imageVector = Icons.Default.Star, // Ikon bintang
+                             contentDescription = "Star",
+                             tint = Color(0xFFFFD700),
+                             modifier = Modifier.size(20.dp)
+                         )
+                     }
+                    
                 }
 
                 Spacer(modifier = Modifier.height(16.dp))
 
                 // Tombol Tambahkan
-                Button(
-                    onClick = { /* Tambahkan ke keranjang */ },
-                    modifier = Modifier.fillMaxWidth()
-                ) {
-                    Text("Tambahkan")
-                }
+             Button(
+                 onClick = { navController.navigate("DetailRestoran/Nasi goreng 88/10000")  },
+                        modifier = Modifier
+                            .fillMaxWidth() // Menyesuaikan lebar
+                            .height(40.dp),
+                 colors = ButtonDefaults.buttonColors(Color(0xFF7B886F)),
+                 shape = RoundedCornerShape(10.dp)      //.background(Color(0xFF7B886F)
+                     
+                             
+                    ) {
+                        Text(
+                            text = "Tambahkan", 
+                            style = MaterialTheme.typography.titleMedium.copy(
+                                       fontWeight = FontWeight.Bold
+                            ),
+                            color = Color.White, // Warna teks
+                            //style = MaterialTheme.typography.button, // Menggunakan gaya teks button default
+                        )
+                    }
             }
         }
     )
@@ -241,6 +330,7 @@ fun DetailMakanan(onBackClick: () -> Unit = {}) {
 @Composable
 fun GreetingPreview2() {
     LeftOverLoveTheme {
-        DetailMakanan()
+        val navController = rememberNavController()
+        DetailMakanan(navController)
     }
 }

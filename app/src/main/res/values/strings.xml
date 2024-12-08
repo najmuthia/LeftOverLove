@@ -7,4 +7,5 @@
     <string name="title_activity_navigation_route">NavigationRoute</string>
     <string name="title_activity_profile_screen">ProfileScreen</string>
     <string name="title_activity_screen">ActivityScreen</string>
+    <string name="title_activity_detail_makanan_pesan">DetailMakananPesan</string>
 </resources>
