@@ -118,7 +118,7 @@ fun DetailRestoran(onBack: () -> Unit) {
             // Info Restoran
             item {
                 Card(
-                    modifier = Modifier
+                    modifier = Modifier 
                         .offset(y = (-32).dp)
                         .fillMaxWidth()
 
