@@ -317,7 +317,7 @@ fun BottomNavigationBar(navController: NavController) {
         )
         NavigationBarItem(
             selected = false,
-            onClick = { navController.navigate("Profile") },
+            onClick = { navController.navigate("profile") },
             icon = {
                 Icon(
                     painter = painterResource(id = R.drawable.profil), // Ikon custom
